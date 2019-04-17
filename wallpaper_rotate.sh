@@ -41,18 +41,34 @@ if [ -L ${my_link} ] ; then
       # here is where we do the needful. 
       if [ -d $todaydir ]; then
          rm $my_link
-         ln -s $todaydir $my_link 
+###         ln -s $todaydir $my_link 
       else 
          echo "$todaydir doesn't exist"
+         echo "LITTLE BAD ERROR: $todaydir should be the directory we usue but isni't there ABORT"
+         exit
       fi 
    else
-      echo "No link $my_link"
+      echo "No link $my_link (it points to somethign that doesnt exist"
+      rm ${my_link}
    fi
+elif [ -d ${my_link} ] ; then
+   echo "${my_link} is a directory - rename it and move on"
+   # don't want to get into too much drama, so just 
+   # rename it to whatever it is + epoch time + __ so it gets 
+   # into the rotation
+   newdir=${my_link}$(date '+%s')"__"
+   mv ${my_link}  ${newdir}
+###   ln -s $todaydir $my_link 
 elif [ -e ${my_link} ] ; then
-   echo "${my_link} is not a link"
+   echo "BIG BAD ERROR: ${my_link} is a thing but it is not a link or dir ABORT"
+   exit
 else
-   echo "${my_link} is missing"
+   # nothing here, so just make the links. 
+   echo "link ${my_link} is missing creating it "
+###   ln -s $todaydir $my_link 
 fi
+
+ln -s $todaydir $my_link 
 
 
 
