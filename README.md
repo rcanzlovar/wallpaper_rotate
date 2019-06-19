@@ -1,5 +1,8 @@
-# wallpaper_rotate
+# wallpaper_rotate 
+Scripts to make screensavers interesting under Linux. By switching between several themed folders, the 
+screensave has a different feel each day. 
 
+## wallpaper_rotate.sh
 Under Linux, rotate amongst a number of folders under Pictures so that each day has a different set of pictures. 
 
 Under the ~/Pictures folder, candidate folders end in two underscores__. The script maintains a symbolic link called "wallpapers" which points to a different peer folder each day. 
@@ -20,4 +23,12 @@ lrwxrwxrwx. 1 root     root      27 Apr 17 03:35 wallpapers -> /local/rca/Pictur
 
 The file wallpaper_rotate.sh can be loaded into /etc/cron.daily 
 
+## xkcdclock.sh
+Based on the time, this determines which of 48 clock images should be symlinked into each of the 
+wallpaper rotation directories above. In this fashion, the XKCD clock becomes a member of each of the
+picture sets while being maintained every 15 minutes. 
 
+## ytimage.sh 
+Pull the image from a youtube video, 
+Usage: ytimage.sh https://youtube.com/v=1v2v34v4v5
+creates a file called YT_1v2v3v4v5.jpg using the highest possible resolution
